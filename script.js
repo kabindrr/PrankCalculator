@@ -1,16 +1,24 @@
-// const getAllButtons = document.querySelectorAll(".btn");
-// console.log(getAllButtons);
+// const clickAllButtons = document.querySelectorAll(".btn");
+// console.log(clickAllButtons);
 
 // let strToDisplay = "";
 // const displayElm = document.querySelector(".display");
 
 // const buttonAction = (value) => {
 //   console.log(value);
+//   if (value === "AC") {
+//     strToDisplay = "";
+//     return display(strToDisplay);
+//   }
+//   if (value === "=") {
+//     return displayTotal();
+//   }
+
 //   strToDisplay += value;
 //   display(strToDisplay);
 // };
 
-// getAllButtons.forEach((btn) => {
+// clickAllButtons.forEach((btn) => {
 //   btn.addEventListener("click", () => {
 //     const value = btn.innerText;
 //     buttonAction(value);
@@ -18,51 +26,45 @@
 // });
 
 // const display = (str) => {
-//   displayElm.innerText = str;
+//   displayElm.innerText = str || "0.0";
 // };
 
-// const getAllButtonClicked = document.querySelectorAll(".btn");
-// console.log(getAllButtonClicked);
-
-// let strToDisplay = "100";
-// const displayElm = document.querySelector(".display");
-
-// const buttonAction = (value) => {
-//   console.log(value);
-//   strToDisplay += value;
-//   display(strToDisplay);
+// const displayTotal = () => {
+//   const total = eval(strToDisplay);
+//   display(total);
 // };
 
-// getAllButtonClicked.forEach((btn) => {
-//   btn.addEventListener("click", () => {
-//     const value = btn.innerText;
-//     buttonAction(value);
-//   });
-// });
-
-// const display = (str) => {
-//   displayElm.innerText = str;
-// };
-
-const getAllButtonsClicked = document.querySelectorAll(".btn");
-console.log(getAllButtonsClicked);
+const getButtonsClicked = document.querySelectorAll(".btn");
 
 let strToDisplay = "";
 const displayElm = document.querySelector(".display");
-console.log(displayElm);
 
-const buttonAction = (value) => {
-  strToDisplay += value;
+const buttonAction = (main) => {
+  if (main === "AC") {
+    strToDisplay = "";
+    return display(strToDisplay);
+  }
 
+  if (main === "=") {
+    return getTotal();
+  }
+
+  strToDisplay += main;
   display(strToDisplay);
 };
 
-getAllButtonsClicked.forEach((btn) => {
+getButtonsClicked.forEach((btn) => {
   btn.addEventListener("click", () => {
-    const value = btn.innerText;
-    buttonAction(value);
+    const main = btn.innerText;
+    buttonAction(main);
   });
 });
+
 const display = (str) => {
-  displayElm.innerText = str;
+  displayElm.innerText = str || "0.0";
+};
+
+const getTotal = () => {
+  const total = eval(strToDisplay);
+  display(total);
 };
