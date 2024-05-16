@@ -148,6 +148,7 @@ let strToDisplay = "";
 const displayElm = document.querySelector(".display");
 
 const operators = ["+", "-", "/", "*", "%"];
+let lastOperator = "";
 
 const buttonAction = (value) => {
   if (value === "AC") {
@@ -161,6 +162,7 @@ const buttonAction = (value) => {
   }
 
   if (value === "=") {
+    lastOperator = value;
     const lastCharacter = strToDisplay[strToDisplay.length - 1];
     if (operators.includes(lastCharacter)) {
       strToDisplay = strToDisplay.slice(0, -1);
@@ -172,6 +174,33 @@ const buttonAction = (value) => {
     const lastChar = strToDisplay[strToDisplay.length - 1];
     if (operators.includes(lastChar)) {
       strToDisplay = strToDisplay.slice(0, -1);
+    }
+  }
+
+  // if (value === ".") {
+  //   const lastOperatorIndex = strToDisplay.lastIndexOf(lastOperator);
+  //   const lastNumberSet = strToDisplay.slice(lastOperatorIndex);
+
+  //   if (lastNumberSet.includes(".")) {
+  //     return;
+  //   }
+
+  //   if (!lastOperator && strToDisplay.includes(".")) {
+  //     return;
+  //   }
+  // }
+
+  if (value === ".") {
+    const lastOperatorIndex = strToDisplay.lastIndexOf(lastOperator);
+
+    const lastNumebrSet = strToDisplay.slice(lastOperatorIndex);
+
+    if (lastNumebrSet.includes(".")) {
+      return;
+    }
+
+    if (!lastOperator && strToDisplay.includes(".")) {
+      return;
     }
   }
 
@@ -191,7 +220,14 @@ const display = (str) => {
 };
 
 const getCalculations = () => {
-  const total = eval(strToDisplay);
+  const extraValue = randomValue();
+  const total = eval(strToDisplay) + extraValue;
+
   strToDisplay = total.toString();
   display(strToDisplay);
+};
+
+const randomValue = () => {
+  const num = Math.round(Math.random() * 10);
+  return num < 5 ? num : 0;
 };
