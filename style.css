@@ -33,6 +33,7 @@ body {
   padding: 2rem 1.5rem;
   border-radius: 10px;
   transform: perspective(70rem) rotatex(30deg);
+  animation: moving 2s;
 
   display: grid;
   gap: 1rem;
@@ -125,4 +126,34 @@ body {
 }
 .btn-0 {
   grid-area: btn0;
+}
+
+.prank {
+  background: rgba(255, 60, 0, 0.733);
+  color: white;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(20px);
+  }
+  50% {
+    transform: translate(-20px);
+  }
+  80% {
+    transform: translate(20px);
+  }
+  100% {
+    transform: translate(-20px);
+  }
+}
+
+@keyframes moving {
+  0% {
+    transform: perspective(10rem) rotatex(30deg);
+  }
+  100% {
+    transform: perspective(70rem) rotatex(30deg);
+  }
 }

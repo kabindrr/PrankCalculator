@@ -150,7 +150,11 @@ const displayElm = document.querySelector(".display");
 const operators = ["+", "-", "/", "*", "%"];
 let lastOperator = "";
 
+const audio = new Audio("./assets/prankSound.mp3");
+
 const buttonAction = (value) => {
+  displayElm.classList.remove("prank");
+
   if (value === "AC") {
     strToDisplay = "";
     return display(strToDisplay);
@@ -209,7 +213,12 @@ const buttonAction = (value) => {
 };
 
 getAllButtonsClicked.forEach((btn) => {
+  btn.addEventListener("mousedown", () => {
+    btn.style.scale = "0.7";
+  });
+
   btn.addEventListener("click", () => {
+    btn.style.scale = "1";
     const value = btn.innerText;
     buttonAction(value);
   });
@@ -221,6 +230,10 @@ const display = (str) => {
 
 const getCalculations = () => {
   const extraValue = randomValue();
+  if (extraValue) {
+    displayElm.classList.add("prank");
+    audio.play();
+  }
   const total = eval(strToDisplay) + extraValue;
 
   strToDisplay = total.toString();
@@ -231,3 +244,8 @@ const randomValue = () => {
   const num = Math.round(Math.random() * 10);
   return num < 5 ? num : 0;
 };
+
+document.addEventListener("keypress", (e) => {
+  const value = e.key;
+  buttonAction(value);
+});
